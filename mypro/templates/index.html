@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body class="body">
+    
+    <div class="box">
+    <div class="box1">
+    {% if data1 %}
+    <form action="{% url 'edit_g' data1.id %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="todo" value="{{data1.title}}" placeholder="Edit your task">
+        <input type="submit" value="save changes">
+    </form>
+    {% else %}
+     <form action="{% url 'index' %}" method="post">
+        {% csrf_token %}
+    <div>
+        <h1 class="head">TODO LIST</h1>
+        <input class="todo" type="text" name="todo1">
+        <input class = "button" type="submit" value="submit">
+        
+    </div>
+</form>
+<div class="box2">
+    {% endif %}
+    {% for i in feeds %}
+    <div>
+        <span>{{i.title}}</span>
+        <a href="{% url 'deletion' i.id %}"><button>Delete</button></a>
+        <a href="{% url 'edit_g' i.id %}"><button>Edit</button></a>
+    </div>
+    {% endfor %}
+<div>
+</div>
+</div>
+</div>
+
+    
+</body>
+</html>
